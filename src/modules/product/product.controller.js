@@ -52,12 +52,31 @@ const getFilteredProducts = (req, res) => {
   })
 }
 
+const addProductRating = (req, res) => {
+  const { id } = req.params
+  const { rating } = req.body
+
+  if(Number(rating) < 1 || Number(rating) > 5) {
+    return res.status(400).json({
+      status: 'FAILED',
+      message: 'Invalid rating. Rating should be between 1 and 5.'
+    })
+  }
+
+  productModel.addProductRating(id, rating)
+  res.json({
+    status: 'SUCCESS',
+    data: 'Rated product successfully!'
+  })
+}
+
 module.exports = {
   getAllProducts,
   getProductByCategory,
   getProductById,
   getSearchedProducts,
-  getFilteredProducts
+  getFilteredProducts,
+  addProductRating
 }
 
 

@@ -265,7 +265,7 @@ const addProductRating = (id, rating) => {
   const product = PRODUCTS.find(product => product.id == Number(id))
 
   if(product) {
-    product.ratings.push(rating)
+    product.ratings.push(Number(rating))
   }
 }
 
